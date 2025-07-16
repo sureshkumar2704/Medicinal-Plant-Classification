@@ -107,10 +107,10 @@ pip install -r requirements.txt
 ---
 ## 🛠️ Built With
 
-TensorFlow
-VGG16
-Streamlit
-BeautifulSoup4
+TensorFlow <br>
+VGG16 <br> 
+Streamlit <br>
+BeautifulSoup4 <br>
 
 ---
 
@@ -148,6 +148,7 @@ VGG16 is one of the most popular CNN architectures with extensive support in:
 <br>✅ How it helps you: You can integrate it smoothly in your Streamlit app without writing low-level code.
 
 The architecture diagram for VGG-16 is shown below: 
+
 ![](https://miro.medium.com/v2/resize:fit:1400/1*NNifzsJ7tD2kAfBXt3AzEg.png)
 
 ## 🚧 Future Work
