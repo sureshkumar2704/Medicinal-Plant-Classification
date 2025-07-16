@@ -84,42 +84,39 @@ Tulsi (Ocimum tenuiflorum), also known as holy basil, is an aromatic perennial p
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/yourusername/medicinal-plant-classifier.git
-cd medicinal-plant-classifier
-2. Install Dependencies
+git clone https://github.com/sureshkumar2704/Medicinal-Plant-Classification.git
+cd Medicinal-Plant-Classification
+```
+### 2. Install Dependencies
+```
 pip install -r requirements.txt
-3. Launch the App
-streamlit run app.py
-🛠️ Built With
+```
+### 3. Launch the App
+``` streamlit run app.py
+```
+---
+##🛠️ Built With
 
 TensorFlow
 VGG16
 Streamlit
 BeautifulSoup4
-Wikipedia & Healthline, [https://www.healthline.com/]
-🚧 Future Work
+Wikipedia 
+---
+##🚧 Future Work
 
 Enhance model with more diverse plant images
 Add multilingual description generation
 Enable offline summary caching
 Add image enhancement and correction features
-📜 License
-
-This project is open-source under the MIT License.
-
-🙌 Acknowledgements
-
-Keras for the pre-trained model
-Wikipedia and Healthline for plant information
-Open datasets used for medicinal plant imagery
 
 ---
 
-## 📦 `requirements.txt`
+##📜 License
 
-```txt
-streamlit==1.35.0
-tensorflow==2.13.0
+This project is open-source under the MIT License.
+
+---
 numpy==1.24.3
 Pillow==9.5.0
 requests==2.31.0
