@@ -1,132 +1,126 @@
 # 🧠 Medicinal Plant Classifier & Identifier
 
-This project uses **deep learning (VGG16)** to classify medicinal plants based on uploaded **leaf or full plant** images. It includes a web app built with **Streamlit** that instantly predicts the plant class and fetches live summaries from **Wikipedia** or **Healthline**.
+This project uses a **VGG16-based Convolutional Neural Network (CNN)** to classify medicinal plants from images of either **leaves** or **entire plants**. It features a **Streamlit-powered web app** that predicts the plant type and dynamically fetches a summary from **Wikipedia** or **Healthline**.
 
 ---
 
-## 🌿 Project Motivation
+## 🌿 Motivation
 
-Identifying medicinal plants accurately is essential for:
-- Traditional medicine
-- Agriculture
-- Biodiversity conservation
-
-Since users may provide either **leaf** or **full-plant** images, a **VGG16 CNN** model was fine-tuned using both views to increase robustness and prediction reliability in real-world conditions.
-
----
-
-## 📁 Dataset Structure
-
-To support dual image types (leaf and plant), the dataset is structured as follows:
-
-
-
-
-
-
-
-
-### ✅ Why `*_leaf` and `*_plant` folders?
-- Helps the model learn both macro (plant) and micro (leaf) level features.
-- Increases classification accuracy when input type varies.
-- Supports flexibility for field or lab-based image input.
+Medicinal plants are vital in herbal medicine, agriculture, and biodiversity. However, accurate identification from images is often difficult due to variations in shape, lighting, and perspective. This project aims to solve that problem using deep learning.
 
 ---
 
 ## 🧠 Model Architecture
 
-| Component | Details |
-|----------|---------|
-| **Base Model** | VGG16 (ImageNet pre-trained) |
-| **Input Size** | 224 × 224 × 3 |
-| **Final Layers** | Flatten → Dense → Dropout → Softmax |
-| **Output Classes** | Based on total folders in `combined_dataset/train/` |
-| **Loss Function** | Categorical Crossentropy |
-| **Optimizer** | Adam |
+- **Base Model**: Pre-trained `VGG16` (from Keras, trained on ImageNet)
+- **Modifications**:
+  - Removed top classification layers
+  - Added `Flatten`, `Dense`, `Dropout`, and final `Softmax` layers
+- **Image Input Size**: 224 × 224 × 3
+- **Final Layer**: Number of output classes = Number of unique folders in dataset (leaf & plant variants)
 
 ---
 
-## 🚀 Key Features
+## 🗂️ Dataset Structure
 
-- 🌱 Upload plant or leaf image
-- 🧠 Real-time prediction with high accuracy
-- 📄 Dynamically fetched plant summary
-- 🔗 Wikipedia or Healthline links for reference
-- ✅ Shows both **actual class** and **predicted class**
-- 📷 Displays uploaded image with label
+The dataset is custom-organized under `combined_dataset/` into three subsets: `train/`, `test/`, and `valid/`, each having subfolders for every class.
 
----
+combined_dataset/
+├── train/
+│ ├── tulsi_leaf/
+│ ├── tulsi_plant/
+│ ├── neem_leaf/
+│ ├── neem_plant/
+│ └── ... more classes
+├── test/
+│ └── same structure as train/
+├── valid/
+│ └── same structure as train/
 
-## 🖥️ Streamlit App (`app.py`)
 
-Functionality:
-- Load `.keras` model from disk
-- Accept uploaded image (JPG, PNG)
-- Resize to `(224, 224)`, normalize
-- Predict class (e.g., `neem_leaf`, `neem_plant`)
-- Convert label to readable format
-- Fetch description from:
-  - ✅ Wikipedia (first attempt)
-  - 🔁 Healthline or search fallback
-- Display:
-  - Image
-  - Actual and predicted label
-  - Link and dynamic summary
+- Each subfolder contains images of a specific class (either leaf or plant).
+- Folders are named like `plantname_leaf` and `plantname_plant` to differentiate.
+- Helps the model generalize better by learning from both parts of the plant.
 
 ---
 
-## 📦 Installation & Usage
+## 🚀 Features
 
-### 🔧 Install dependencies
+- 📤 Upload an image of a **leaf** or **whole plant**
+- 🔍 Real-time prediction using a fine-tuned VGG16 model
+- 📑 Automatically fetch plant description from:
+  - Wikipedia (preferred)
+  - Healthline (fallback if Wikipedia fails)
+- 🧾 Displays:
+  - Predicted class (e.g., "Neem Plant")
+  - Actual internal class label
+  - Dynamic summary
+  - External knowledge links
+
+---
+
+## 🖼️ Web App (`app.py`)
+
+### 🔧 Core Functionality:
+- Loads your `medicinal_model.keras` model
+- Preprocesses and predicts image class using TensorFlow
+- Uses `requests` and `BeautifulSoup` to fetch description from Wikipedia
+- Provides fallback search using Healthline
+
+### 📋 Example Output:
+✅ Predicted: Tulsi Leaf
+🔍 Actual Class: tulsi_leaf
+
+📘 Summary:
+Tulsi (Ocimum tenuiflorum), also known as holy basil, is an aromatic perennial plant...
+
+🌐 Learn more on Wikipedia »
+
+
+---
+
+## 🔧 Installation & Running Locally
+
+### 1. Clone the Repo
+
 ```bash
+git clone https://github.com/yourusername/medicinal-plant-classifier.git
+cd medicinal-plant-classifier
+2. Install Dependencies
 pip install -r requirements.txt
-Or install manually:
-
-pip install streamlit tensorflow numpy Pillow beautifulsoup4 requests
-```
-###🚀 Run the app
+3. Launch the App
 streamlit run app.py
-
-📄 requirements.txt
-
-streamlit
-tensorflow
-numpy
-Pillow
-beautifulsoup4
-requests
-🧪 Sample Output
-
-✅ Prediction: Neem Plant
-
-📄 Summary:
-Azadirachta indica (Neem) is a tree in the mahogany family native to the Indian subcontinent. 
-It has widespread medicinal and agricultural uses.
-
-🔗 Wikipedia: https://en.wikipedia.org/wiki/Neem
-🎯 Future Enhancements
-
-🔍 Add more plant species for better coverage
-🧾 Multilingual summary support (Tamil, Hindi, etc.)
-📦 Offline summary caching for repeated queries
-🧠 Model ensembling for confidence boost
-🌐 Integration with AYUSH, PubMed APIs
 🛠️ Built With
 
 TensorFlow
-Keras
-VGG16 Architecture
+VGG16
 Streamlit
-BeautifulSoup
-Wikipedia
-Healthline
+BeautifulSoup4
+Wikipedia & Healthline, [https://www.healthline.com/]
+🚧 Future Work
+
+Enhance model with more diverse plant images
+Add multilingual description generation
+Enable offline summary caching
+Add image enhancement and correction features
 📜 License
 
-This project is licensed under the MIT License – feel free to use, adapt, and distribute with credit.
+This project is open-source under the MIT License.
 
 🙌 Acknowledgements
 
-Keras for pre-trained VGG16 model
-Public datasets of medicinal plants
-Wikipedia and Healthline for live data
-Open-source community for Streamlit and Python tools
+Keras for the pre-trained model
+Wikipedia and Healthline for plant information
+Open datasets used for medicinal plant imagery
+
+---
+
+## 📦 `requirements.txt`
+
+```txt
+streamlit==1.35.0
+tensorflow==2.13.0
+numpy==1.24.3
+Pillow==9.5.0
+requests==2.31.0
+beautifulsoup4==4.12.3
