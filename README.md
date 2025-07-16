@@ -1,4 +1,4 @@
-# 🧠 Medicinal Plant Classifier & Identifier
+# 🧠 Identification and Classification of Medicinal Plant 
 
 This project uses a **VGG16-based Convolutional Neural Network (CNN)** to classify medicinal plants from images of either **leaves** or **entire plants**. It features a **Streamlit-powered web app** that predicts the plant type and dynamically fetches a summary from **Wikipedia** or **Healthline**.
 
@@ -25,18 +25,20 @@ Medicinal plants are vital in herbal medicine, agriculture, and biodiversity. Ho
 
 The dataset is custom-organized under `combined_dataset/` into three subsets: `train/`, `test/`, and `valid/`, each having subfolders for every class.
 
+```
 combined_dataset/
 ├── train/
-│ ├── tulsi_leaf/
-│ ├── tulsi_plant/
-│ ├── neem_leaf/
-│ ├── neem_plant/
-│ └── ... more classes
+│   ├── tulsi_leaf/
+│   ├── tulsi_plant/
+│   ├── neem_leaf/
+│   ├── neem_plant/
+│   └── ... more classes
 ├── test/
-│ └── same structure as train/
+│   └── same structure as train/
 ├── valid/
-│ └── same structure as train/
+│   └── same structure as train/
 
+```
 
 - Each subfolder contains images of a specific class (either leaf or plant).
 - Folders are named like `plantname_leaf` and `plantname_plant` to differentiate.
@@ -71,11 +73,19 @@ combined_dataset/
 ✅ Predicted: Tulsi Leaf
 🔍 Actual Class: tulsi_leaf
 
-📘 Summary:
-Tulsi (Ocimum tenuiflorum), also known as holy basil, is an aromatic perennial plant...
-
 🌐 Learn more on Wikipedia »
 
+1. User is asked to upload an image
+2. A new test image is used for prediction
+   
+![](assets/image1.png)
+
+4. Image is classified into its appropriate classes
+5. Prints the actual class
+6. Prints the predicted class
+7. Gives a link for the direct access to the wikipedia of the plant that has been identified
+   
+![](assets/image2.png)
 
 ---
 
@@ -95,15 +105,52 @@ pip install -r requirements.txt
 ``` streamlit run app.py
 ```
 ---
-##🛠️ Built With
+## 🛠️ Built With
 
 TensorFlow
 VGG16
 Streamlit
 BeautifulSoup4
-Wikipedia 
+
 ---
-##🚧 Future Work
+
+## 🌟 Advantages of VGG16
+
+### 1. Pretrained on a Large Dataset (ImageNet)
+VGG16 is trained on ImageNet, which contains over 14 million images across 1000 classes.
+This means VGG16 has already learned rich, general-purpose image features (edges, textures, shapes, etc.). 
+<br> ✅ How it helps you: You can leverage these learned features through transfer learning, even with a relatively smaller medicinal plant dataset.
+
+### 2. Simple and Consistent Architecture
+VGG16 uses only 3x3 convolution filters and 2x2 max pooling, stacked in a very uniform and repeatable way.
+<br> This makes it:
+- Easy to understand and modify
+- Reliable for image classification tasks
+<br>
+✅ How it helps you: You can easily remove the top layers and add your custom classification head for leaf and plant categories.
+
+### 3. Deep Enough to Learn Complex Patterns
+With 16 weight layers, VGG16 is deep enough to learn fine-grained visual distinctions (like differences between a tulsi leaf and a neem leaf).
+<br> ✅ How it helps you: It can capture the subtle differences in texture, vein pattern, and structure between different species.
+
+### 4. Strong Performance in Transfer Learning
+VGG16 is known to perform well in many fine-tuning applications, especially in medical and agricultural image analysis.
+<br> ✅ How it helps you: You don’t need to train a deep model from scratch. Instead, you retrain only the last few layers, which:
+- Saves time
+- Requires less data
+- Avoids overfitting
+  
+### 5. Community Support and Compatibility
+VGG16 is one of the most popular CNN architectures with extensive support in:
+- Keras, TensorFlow
+- Pretrained weights available instantly
+- Easy to deploy in apps (like yours with Streamlit)
+<br>✅ How it helps you: You can integrate it smoothly in your Streamlit app without writing low-level code.
+
+The architecture diagram for VGG-16 is shown below: 
+![](https://miro.medium.com/v2/resize:fit:1400/1*NNifzsJ7tD2kAfBXt3AzEg.png)
+
+## 🚧 Future Work
 
 Enhance model with more diverse plant images
 Add multilingual description generation
@@ -112,12 +159,8 @@ Add image enhancement and correction features
 
 ---
 
-##📜 License
+## 📜 License
 
 This project is open-source under the MIT License.
 
 ---
-numpy==1.24.3
-Pillow==9.5.0
-requests==2.31.0
-beautifulsoup4==4.12.3
