@@ -160,8 +160,8 @@ Add image enhancement and correction features
 
 ---
 
-## 📜 License
+## 🍂 Dataset
 
-This project is open-source under the MIT License.
+I have used the dataset from [Kaggle](https://www.kaggle.com/datasets/aryashah2k/indian-medicinal-leaves-dataset)
 
 ---
